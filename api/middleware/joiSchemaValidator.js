@@ -26,3 +26,16 @@ module.exports.validateBody = (schema) => {
         return next()
     }
 }
+
+module.exports.validateQueryParams = (schema) => {
+    return (req, res, next) => {
+        const error = validateSchema(req.query, schema)
+        if (error) {
+            console.log("error validaring schema:", error)
+            return res.status(400).send({...errorResponse, status: 400, message: error})
+        }
+        console.log("schema validated successfully")
+        return next()
+    }
+}
+

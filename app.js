@@ -11,6 +11,7 @@ const app = express()
 dbConnection()
 
 app.use(express.json())
+app.use(express.urlencoded())
 
 app.use("/api/v1/product", productRouter)
 
