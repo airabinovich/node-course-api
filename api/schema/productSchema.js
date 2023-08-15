@@ -10,3 +10,7 @@ module.exports.getAllProductsSchema = Joi.object().keys({
     skip: Joi.string(),
     limit: Joi.string()
 });
+
+module.exports.getProductByIdSchema = Joi.object().keys({
+    id: Joi.string().required()
+});

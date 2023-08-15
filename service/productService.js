@@ -1,4 +1,5 @@
 const Product = require('../database/model/product')
+const mongoose = require('mongoose')
 
 module.exports.createProduct = async (createProductData) => {
     try {
@@ -13,12 +14,28 @@ module.exports.createProduct = async (createProductData) => {
 
 module.exports.getAllProducts = async ({skip = "0", limit = "100"}) => {
     try {
-        const products = await Product.find({}).skip(parseInt(skip)).limit(parseInt(limit))
+        const products = await Product.find({}).skip(parseInt(skip)).limit(parseInt(limit));
         return products.map(product => {
             return product.toObject();
         })
     } catch (error) {
         console.log("Error fetching products from the DB", error)
+        throw new Error(error);
+    }
+}
+
+module.exports.getProductById = async ({id}) => {
+    try {
+        if(!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("Invalid Id");
+        }
+        const product = await Product.findById(id);
+        if (!product) {
+            throw new Error("Product Not Found");
+        }
+        return product.toObject();
+    } catch (error) {
+        console.log("Error fetching product from the DB", error);
         throw new Error(error);
     }
 }

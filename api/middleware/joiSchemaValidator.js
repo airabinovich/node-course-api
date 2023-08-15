@@ -39,3 +39,15 @@ module.exports.validateQueryParams = (schema) => {
     }
 }
 
+module.exports.validateUrlEncodedParams = (schema) => {
+    return (req, res, next) => {
+        const error = validateSchema(req.params, schema)
+        if (error) {
+            console.log("error validaring schema:", error)
+            return res.status(400).send({...errorResponse, status: 400, message: error})
+        }
+        console.log("schema validated successfully")
+        return next()
+    }
+}
+

@@ -27,3 +27,17 @@ module.exports.getAllProducts = async (req, res) => {
         res.status(500).send({...response, status: 500, message: "An error occurred"})
     }
 }
+
+module.exports.getProductById = async (req, res) => {
+    const response = {
+        status: 200,
+        message: "Product Fetched Successfully",
+        body: {}
+    }
+    try {
+        const createProductResult = await productService.getProductById(req.params)
+        res.status(response.status).send({...response, body: createProductResult})
+    } catch (error) {
+        res.status(500).send({...response, status: 500, message: error.message})
+    }
+}
