@@ -6,6 +6,12 @@ module.exports.createProductSchema = Joi.object().keys({
     brand: Joi.string().required()
 });
 
+module.exports.updateProductSchema = Joi.object().keys({
+    name: Joi.string(),
+    price: Joi.number(),
+    brand: Joi.string()
+});
+
 module.exports.getAllProductsSchema = Joi.object().keys({
     skip: Joi.string(),
     limit: Joi.string()
