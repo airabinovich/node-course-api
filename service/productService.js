@@ -41,8 +41,6 @@ module.exports.getProductById = async ({id}) => {
 }
 
 module.exports.updateProductById = async ({id, updateProductData}) => {
-    console.log("ID:", id)
-    console.log("DATA:", updateProductData)
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Invalid Id");
@@ -61,7 +59,21 @@ module.exports.updateProductById = async ({id, updateProductData}) => {
         }
         return product.toObject();
     } catch (error) {
-        console.log("Error fetching product from the DB", error);
+        console.log("Error updating product from the DB", error);
+        throw new Error(error);
+    }
+}
+
+module.exports.deleteProductById = async ({id}) => {
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("Invalid Id");
+        }
+
+        const product = await Product.findByIdAndDelete(id)
+        return product.toObject();
+    } catch (error) {
+        console.log("Error deleting product from the DB", error);
         throw new Error(error);
     }
 }

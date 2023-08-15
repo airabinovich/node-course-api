@@ -55,3 +55,17 @@ module.exports.updateProductById = async (req, res) => {
         res.status(500).send({...response, status: 500, message: error.message})
     }
 }
+
+module.exports.deleteProductById = async (req, res) => {
+    const response = {
+        status: 410,
+        message: "Product Deleted Successfully",
+        body: {}
+    }
+    try {
+        const createProductResult = await productService.deleteProductById(req.params)
+        res.status(response.status).send({...response, body: createProductResult})
+    } catch (error) {
+        res.status(500).send({...response, status: 500, message: error.message})
+    }
+}

@@ -21,4 +21,8 @@ router.put("/:id",
     schemaValidator.validateBody(schema.updateProductSchema),
     productController.updateProductById)
 
+router.delete("/:id",
+    schemaValidator.validateUrlEncodedParams(schema.getProductByIdSchema),
+    productController.deleteProductById)
+
 module.exports = router;
