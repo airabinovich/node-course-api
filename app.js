@@ -1,6 +1,7 @@
 const express = require("express")
 const dotenv = require("dotenv")
 const productRouter = require('./api/productRouter');
+const userRouter = require('./api/userRouter');
 
 const dbConnection = require("./database/connection")
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded())
 
 app.use("/api/v1/product", productRouter)
+app.use("/api/v1/user", userRouter)
 
 const PORT = process.env.PORT || 8080
 
