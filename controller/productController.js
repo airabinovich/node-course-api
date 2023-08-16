@@ -10,7 +10,7 @@ module.exports.createProduct = async (req, res) => {
         const createProductResult = await productService.createProduct(req.body)
         res.status(response.status).send({...response, body: createProductResult})
     } catch (error) {
-        res.status(500).send({...response, status: 500, message: "An error occurred"})
+        res.status(500).send({...response, status: 500, message: error.message})
     }
 }
 
@@ -24,7 +24,7 @@ module.exports.getAllProducts = async (req, res) => {
         const createProductResult = await productService.getAllProducts(req.query)
         res.status(response.status).send({...response, body: createProductResult})
     } catch (error) {
-        res.status(500).send({...response, status: 500, message: "An error occurred"})
+        res.status(500).send({...response, status: 500, message: error.message})
     }
 }
 
