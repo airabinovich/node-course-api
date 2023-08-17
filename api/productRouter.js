@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router()
 const productController = require('../controller/productController')
 const schemaValidator = require('./middleware/joiSchemaValidator')
+const tokenValidator = require('./middleware/tokenValidation')
 const schema = require("./schema/productSchema");
+
+router.use(tokenValidator.validateToken)
 
 router.post("/",
     schemaValidator.validateBody(schema.createProductSchema),
